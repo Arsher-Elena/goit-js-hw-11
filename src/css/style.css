@@ -1,0 +1,40 @@
+.input-form,
+.button-load {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.submit {
+    height: 30px;
+}
+.input {
+    height: 30px;
+}
+
+.submit,
+.load-more {
+    background-color: rgb(103, 103, 151);
+    color: aliceblue;
+    border: 1px solid rgb(7, 7, 39);
+    border-radius: 4px;
+}
+
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 20;
+}
+.info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+.img-photo {
+    width: 400px;
+    height: 280px;
+}

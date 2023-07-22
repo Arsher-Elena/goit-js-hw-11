@@ -5,7 +5,7 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 
 const BASE_URL = 'https://pixabay.com/api/';
 const OPTIONS = 'image_type=photo&orientation=horizontal&safesearch=true&per_page=40'
-const KEY ='38315175-abb8429954921ba34a6a526ed'
+const KEY ='38400924-f03b6aa438234c1c449913611'
 let curretPage = 1;
 
 const refs = { 
@@ -51,15 +51,6 @@ refs.form.addEventListener('submit', onSubmitSearch);
        console.log( Number(data.totalHits/40))
        const response = await createMarcup(data.hits)
        Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
-
-//        const { height: cardHeight } = document
-//   .querySelector(".gallery")
-//   .firstElementChild.getBoundingClientRect();
-
-// window.scrollBy({
-//   top: cardHeight * 2,
-//   behavior: "smooth",
-// });
 
  }   
    } catch (error) {
@@ -133,9 +124,6 @@ window.scrollBy({
      console.log(error)
      }    
 }
-
-
-
 
 function removeHiddenAtribute(el) {
     el.hidden = false
