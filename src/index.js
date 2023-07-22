@@ -21,17 +21,21 @@ async function onSearch(whatFound, page=1) {
           return response.data
  
 }
-
+refs.loadMore.addEventListener('click', onClickLoadMore)
 refs.form.addEventListener('submit', onSubmitSearch);
 
- async function onSubmitSearch(e) {
+   async function onSubmitSearch(e) {
    e.preventDefault();
    addHiddenAtribute(refs.error)
    addHiddenAtribute(refs.loadMore);
-    
-   
    refs.gallery.textContent = "";
-    let { searchQuery } = e.currentTarget.elements;
+   let { searchQuery } = e.currentTarget.elements;
+     
+     if (!searchQuery.value.trim()) {
+         Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.")
+         return refs.gallery.textContent = "";
+    }
+
    try {       
      const data = await onSearch(searchQuery.value)
     
@@ -51,6 +55,7 @@ refs.form.addEventListener('submit', onSubmitSearch);
        console.log( Number(data.totalHits/40))
        const response = await createMarcup(data.hits)
        Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
+
 
  }   
    } catch (error) {
@@ -89,8 +94,6 @@ function createMarcup(e) {
   var lightbox = new SimpleLightbox('.gallery a', { captionsData: `alt`, captionDelay: 250 });
   lightbox.refresh()
   }
-
-
 
 
 refs.loadMore.addEventListener('click', onClickLoadMore)
