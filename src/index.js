@@ -44,31 +44,28 @@ refs.form.addEventListener('submit', onSubmitSearch);
       Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.") 
        removeHiddenAtribute(refs.error)
        
-     } else if (curretPage >= Number(data.totalHits/40)){
-            
-      Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.")
-       addHiddenAtribute(refs.loadMore)
-
-      
-   
+     }
+     else if (curretPage >= Number(data.totalHits / 40)) {
+         const response = await createMarcup(data.hits);
+         Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`)
+    //   Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.")
+       
      } else {
-       console.log( Number(data.totalHits/40))
-       const response = await createMarcup(data.hits)
-       Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
-
-
- }   
+           removeHiddenAtribute(refs.loadMore)
+           const response = await createMarcup(data.hits);
+           Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
+     
+ }
    } catch (error) {
      Notiflix.Notify.failure(error)
       removeHiddenAtribute(refs.error)
      console.log(error)
-     }    
+       }  
+       
 }
 
 
 function createMarcup(e) {
-
-   removeHiddenAtribute(refs.loadMore)
 
    let marcup = e.map(({ likes, largeImageURL, tags, views, webformatURL, comments, downloads }) =>
             `<div class="photo-card">
@@ -104,20 +101,18 @@ async function onClickLoadMore() {
   
   try {       
     const data = await onSearch(currentValue, curretPage)     
-    const response = await createMarcup(data.hits)
-
-
-    const { height: cardHeight } = document
-  .querySelector(".gallery")
-  .firstElementChild.getBoundingClientRect();
-
-window.scrollBy({
-  top: cardHeight * 2,
-  behavior: "smooth",
-});
-    
-    if (curretPage >= Number(data.totalHits/40)){
+      const response = await createMarcup(data.hits)
       
+         const { height: cardHeight } = document
+         .querySelector(".gallery")
+         .firstElementChild.getBoundingClientRect();
+
+         window.scrollBy({
+         top: cardHeight * 2,
+         behavior: "smooth",
+});
+
+      if (curretPage >= Number(data.totalHits / 40)) {
       Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.")
       addHiddenAtribute(refs.loadMore) 
    
