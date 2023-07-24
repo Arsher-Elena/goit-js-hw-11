@@ -28,7 +28,7 @@ refs.form.addEventListener('submit', onSubmitSearch);
    e.preventDefault();
    addHiddenAtribute(refs.error)
    addHiddenAtribute(refs.loadMore);
-   refs.gallery.textContent = "";
+       refs.gallery.textContent = "";
    let { searchQuery } = e.currentTarget.elements;
      
      if (!searchQuery.value.trim()) {
@@ -48,7 +48,7 @@ refs.form.addEventListener('submit', onSubmitSearch);
      else if (curretPage >= Number(data.totalHits / 40)) {
          const response = await createMarcup(data.hits);
          Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`)
-    //   Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.")
+      Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.")
        
      } else {
            removeHiddenAtribute(refs.loadMore)
@@ -60,8 +60,8 @@ refs.form.addEventListener('submit', onSubmitSearch);
      Notiflix.Notify.failure(error)
       removeHiddenAtribute(refs.error)
      console.log(error)
-       }  
-       
+       } 
+       return curretPage = 1;
 }
 
 
@@ -120,7 +120,8 @@ async function onClickLoadMore() {
     } catch (error) {
       removeHiddenAtribute(refs.error)
      console.log(error)
-     }    
+    }   
+    
 }
 
 function removeHiddenAtribute(el) {
